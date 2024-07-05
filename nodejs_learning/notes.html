@@ -1,0 +1,34 @@
+<h1>NODEJS NOTES</h1>
+<h2>Nodemon</h2>
+<p>It is installed as a dev dependency, means it is not required in the production. To do so we can include
+<span>npm i nodemon -D (or) npm i nodemon --save-dev</span>
+</p>
+<p>npx is used to install something globally or not?.</p>
+
+<h2>Express</h2>
+<p>./public</p>
+<p>In this dir, all the static assets are stored. Otherwise  they have to mention like every url for every asset.</p>
+<p>In this if we store the index.html file then it will be the default file for our project root. If we hit localhost:5000/ then index.html gets rendered.</p>
+<p>app.use(express.static("./public"))</p>
+
+<h3>Response sending</h3>
+<p>If in the req,res call you are sending multiple responses based on the conn's then use return in the middle res send messages. If there is no codde adfter the res.send() then there is no need of the return stmt. Otherwise there will be error in the server.</p>
+
+<h2>Middleware<h2>
+    <p>app.get(path,middleware_function,callback_function)</p>
+    <p>We donot pass anything but express passes them.
+    middleware=(req,res,next)=>{
+
+    }</p>
+    <p>If our middleware sends the response there is no need of the next. Or else the page keeps on refreshing.</p>\
+<p>app.use(middleware) is used to apply the middleware function for all the routes.</p> 
+<p>app.use("/api",middleware_reference) and here it is applied to all the routes.</p> 
+
+<h2>POST</h2>
+<p>Body is required here.</p>
+
+<p>In the form action="path",if in the same place they can give only filename but if they are different path then given the entire route only it works.</p>
+<p>app.use(express.urlencoded({extended:false}))</p>
+
+<h2>Router</h2>
+<p>If any urls have a common path mostly then the urls can be groupes.</p>

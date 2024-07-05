@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>TODO LIST APPLICATION</title>
+    <script>
+        function updateTodo(id){
+            fetch(`/api/todo/${id}/markAsCompleted`,{
+                method: "PUT",
+                headers: {"Content-Type":"application/json"},
+            })
+            .then((res) => {
+                if(res.ok){window.location.reload();}
+                
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="grid grid-cols-6">
+        <div class="col-start-3 col-span-2">
+            <%- include('header.ejs') %>
+            <form action="/api/todo" method="post">
+                <div class="flex gap-2 py-4">
+                    <div class="flex-auto">
+                        <input type="text" name="title" placeholder="Next task" class="border border-black w-full p-2 text-sm leading-5" required/>
+                    </div>
+                    <div class="flex-auto">
+                        <input type="Date" name="dueDate" class="border border-black w-full p-2 text-sm leading-5" />
+                    </div>
+                    <div class="flex-none">
+                        <button type="submit" class="bg-cyan-500 rounded hover:bg-cyan-600 text-white px-5 py-2">Add task</button>
+                    </div>
+                </div>
+
+               
+            
+            </form>
+            completedItem
+            <%- include('todos.ejs',{title:"overDueItems", data:overDue}) %>
+            <%- include('todos.ejs',{title:"dueTodayItems", data:dueToday}) %>
+            <%- include('todos.ejs',{title:"dueLaterItems", data:dueLater}) %>
+            <%- include('todos.ejs',{title:"completed Item", data:completedItem}) %>
+        </div>
+    </div>
+    
+
+
+    <table>
+        <% for(var i = 0; i < all.length; i++){ %>
+            <tr>
+                <td><%= all[i].title %></td>
+            </tr>
+
+       <% } %>
+    </table>
+</body>
+</html>
